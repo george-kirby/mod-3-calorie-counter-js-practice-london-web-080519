@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>Calorie Counter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="main.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
-  <script src="main.js"></script>
+  <script defer src="main.js"></script>
 </head>
 
 <body>
@@ -23,16 +23,16 @@
 
     <!-- The left DIV containing features pertaining to BMR -->
     <div class="uk-width-1-3 uk-card uk-card-default uk-padding uk-margin-left">
-      <form id="bmr-calulator" class="uk-card-header">
+      <form id="bmr-calculator" class="uk-card-header">
         <h3>Basal Metabolic Rate</h3>
         <div class="uk-margin-small">
-          <input class="uk-input" type="number" placeholder="Weight (lbs)" min="1">
+          <input name="weight" class="uk-input" type="number" placeholder="Weight (lbs)" min="1">
         </div>
         <div class="uk-margin-small">
-          <input class="uk-input" type="number" placeholder="Height (inches)" min="1">
+          <input name="height"class="uk-input" type="number" placeholder="Height (inches)" min="1">
         </div>
         <div class="uk-margin-small">
-          <input class="uk-input" type="number" placeholder="Age (years)" min="1">
+          <input name="age" class="uk-input" type="number" placeholder="Age (years)" min="1">
         </div>
         <button class="uk-button uk-button-default"
           uk-tooltip="title: BMR (Basal Metabolic Rate) is the number of calories required to keep your body functioning at rest. This is the amount of calories your body burns even if you did nothing all day.; pos: left">Calculate
@@ -42,13 +42,14 @@
       <div id="bmr-calculation-result" class="uk-padding">
         <h3 class="uk-text-center"
           uk-tooltip="title: Measured in kcal. BMR varies depending on the individual but this is a good starting point.">
-          <span id="lower-bmr-range">500</span><em class="uk-text-meta">kcal</em>
+          <span id="lower-bmr-range"></span><em class="uk-text-meta">kcal</em>
           —
-          <span id="higher-bmr-range">700</span><em class="uk-text-meta">kcal</em>
+          <span id="higher-bmr-range"></span><em class="uk-text-meta">kcal</em>
         </h3>
-        <progress class="uk-progress" value="0" max="0"
+        <progress class="uk-progress" value="0" max="2000"
           uk-tooltip="title: Keep bar below 100% to lose weight, above 100% to gain weight."></progress>
-      </div>
+        <p id="progress-p"></p>
+        </div>
     </div>
 
     <!-- The right DIV containing features pertaining to calorie entries -->
@@ -57,64 +58,16 @@
         <h3>Record calorie intake:</h3>
         <div>
           <div class="uk-margin-small">
-            <input type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
+            <input name="calorie" type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
           </div>
           <div class="uk-margin-small">
-            <textarea type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
+            <textarea name="note" type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
           </div>
           <button class="uk-button uk-button-default">Add Calorie Intake</button>
         </div>
       </form>
 
       <ul id="calories-list" class="uk-list uk-list-striped">
-        <li class="calories-list-item">
-          <div class="uk-grid">
-            <div class="uk-width-1-6">
-              <strong>400</strong>
-              <span>kcal</span>
-            </div>
-            <div class="uk-width-4-5">
-              <em class="uk-text-meta">Lorem ipsum dolores, some other filler text that I cannot rememeber the rest
-                of...</em>
-            </div>
-          </div>
-          <div class="list-item-menu">
-            <a class="edit-button" uk-icon="icon: pencil" uk-toggle="target: #edit-form-container"></a>
-            <a class="delete-button" uk-icon="icon: trash"></a>
-          </div>
-        </li>
-        <li class="calories-list-item">
-          <div class="uk-grid">
-            <div class="uk-width-1-6">
-              <strong>400</strong>
-              <span>kcal</span>
-            </div>
-            <div class="uk-width-4-5">
-              <em class="uk-text-meta">Lorem ipsum dolores, some other filler text that I cannot rememeber the rest
-                of...</em>
-            </div>
-          </div>
-          <div class="list-item-menu">
-            <a class="edit-button" uk-icon="icon: pencil" uk-toggle="target: #edit-form-container"></a>
-            <a class="delete-button" uk-icon="icon: trash"></a>
-          </div>
-        </li>
-        <li class="calories-list-item">
-          <div class="uk-grid">
-            <div class="uk-width-1-6">
-              <strong>400</strong>
-              <span>kcal</span>
-            </div>
-            <div class="uk-width-4-5">
-              <em class="uk-text-meta">Lorem ipsum dolores, some other filler text that I cannot rememeber the rest
-                of...</em>
-            </div>
-          </div>
-          <div class="list-item-menu">
-            <a class="edit-button" uk-icon="icon: pencil" uk-toggle="target: #edit-form-container"></a>
-            <a class="delete-button" uk-icon="icon: trash"></a>
-          </div>
-        </li>
       </ul>
     </div>
   </main>
@@ -126,10 +79,10 @@
         <h3>Edit calorie intake:</h3>
         <div>
           <div class="uk-margin-small">
-            <input type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
+            <input name="calorie" type="number" class="uk-input" min="0" placeholder="Calories (kcal)">
           </div>
           <div class="uk-margin-small">
-            <textarea type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
+            <textarea name="note" type="text" class="uk-textarea" placeholder="Notes" style="resize:none"></textarea>
           </div>
           <button class="uk-button uk-button-default">Update Entry</button>
         </div>
